@@ -31,7 +31,7 @@ formContainer.addEventListener('submit', e => {
 
 
 function appendMsg(msg){
-    const msgEl = document.createElement('dev');
+    const msgEl = document.createElement('div');
     msgEl.innerText = msg;
     msgContainer.append(msgEl);
 }

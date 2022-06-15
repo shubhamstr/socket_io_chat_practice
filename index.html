@@ -8,10 +8,17 @@
     <title>Document</title>
     <script defer src="http://localhost:3500/socket.io/socket.io.js"></script>
     <script defer src="script.js"></script>
+    <style>
+        #msg-container {
+            height:100%;
+        }
+        #form-container {
+            margin-top:10%;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h4>You Joined</h4>
+    <div class="container p-3">
         <div id="msg-container">
 
         </div>
@@ -20,7 +27,7 @@
                 <div class="input-group">
                     <input type="text" id="msg" class="form-control">
                     <div class="input-group-append">
-                        <bxutton type="submit" id="send" class="btn btn-primary"></bxutton>
+                        <button type="submit" id="send" class="btn btn-primary">Send</button>
                     </div>
                 </div>
             </div>
