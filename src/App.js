@@ -52,7 +52,7 @@ function App() {
     })
     
     socket.on('user-disconnected', name => {
-        console.log(`${name}: disconnected`);
+        // console.log(`${name}: disconnected`);
         appendMsg(`${name}: disconnected`);
     })
 
@@ -62,6 +62,7 @@ function App() {
     
   return (
     <div className="container p-3">
+      <h4>Hello, {username}</h4>
       <div id="msg-container">{appendmsg}</div>
       <div className="form-row" id="form-container">
         <div className="input-group">

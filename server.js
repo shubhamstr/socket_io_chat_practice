@@ -22,6 +22,10 @@ http.listen(3001, () => {
       console.log('msg',msg);
       socket.broadcast.emit("chat-msg", { msg: msg, name: users[socket.id] });
     });
+    socket.on("disconnect", () => {
+      socket.broadcast.emit("user-disconnected", users[socket.id]);
+      delete users[socket.id];
+    });
   });
 });
 
