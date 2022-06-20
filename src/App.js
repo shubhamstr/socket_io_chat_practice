@@ -16,7 +16,7 @@ function App() {
 
     const send = () => {
         socket.emit('send-msg', msg);
-        appendMsg(`You: ${msg}`);
+        // appendMsg(`You: ${msg}`);
         setmsg("");
     }
 
@@ -55,7 +55,7 @@ function App() {
     
     socket.on('user-disconnected', name => {
         // console.log(`${name}: disconnected`);
-        appendMsg(`${name}: disconnected`);
+        // appendMsg(`${name}: disconnected`);
     })
 
     useEffect(() => {
