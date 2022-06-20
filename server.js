@@ -21,8 +21,9 @@ http.listen(3001, () => {
       socket.broadcast.emit("user-connected", name);
     });
     socket.on("send-msg", (msg) => {
-      console.log(users);
+      console.log('users',users);
       console.log('msg',msg);
+      console.log('username',users[socket.id]);
       socket.broadcast.emit("chat-msg", { msg: msg, name: users[socket.id] });
     });
     socket.on("disconnect", () => {

@@ -4,4 +4,7 @@
 }
 #form-container {
     margin-top:10%;
+    position: fixed;
+    bottom: 5%;
+    width: 80%;
 }
