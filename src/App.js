@@ -7,7 +7,7 @@ function App() {
     const [msg, setmsg] = useState("");
     const [username, setusername] = useState("");
     const [connectBtnFlag, setconnectBtnFlag] = useState(false);
-    const [appendmsg, setappendmsg] = useState([]);
+    const [msgArr, setMsgArr] = useState([]);
 
     const onChange = (e) => {
         // console.log(e.target.value);
@@ -26,7 +26,8 @@ function App() {
 
     const appendMsg = (val) => {
         // console.log(val);
-        setappendmsg((obj) => [...obj, val]);
+        // console.log(msgArr);
+        setMsgArr((obj) => [...obj, val]);
     }
 
     const usernamePrompt = () => {
@@ -38,34 +39,33 @@ function App() {
         setconnectBtnFlag(true);
     }
 
-    socket.on('test', data => {
-        // console.log(data);
-        appendMsg(`${data}`);
-    })
-
-    socket.on('chat-msg', data => {
-        // console.log(`${data.name}: ${data.msg}`);
-        appendMsg(`${data.name}: ${data.msg}`);
-    })
-    
-    socket.on('user-connected', name => {
-        // console.log(`${name}: connected`);s
-        appendMsg(`${name}: connected`);
-    })
-    
-    socket.on('user-disconnected', name => {
-        // console.log(`${name}: disconnected`);
-        // appendMsg(`${name}: disconnected`);
-    })
-
     useEffect(() => {
+      socket.on('test', data => {
+          // console.log(data);
+          appendMsg(`${data}`);
+      })
+  
+      socket.on('chat-msg', data => {
+          // console.log(`${data.name}: ${data.msg}`);
+          appendMsg(`${data.name}: ${data.msg}`);
+      })
+      
+      socket.on('user-connected', name => {
+          // console.log(`${name}: connected`);s
+          appendMsg(`${name}: connected`);
+      })
+      
+      socket.on('user-disconnected', name => {
+          // console.log(`${name}: disconnected`);
+          appendMsg(`${name}: disconnected`);
+      })
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     
   return (
     <div className="container p-3">
       <h4>Hello, {username}</h4>
-      <div id="msg-container">{appendmsg.map((val,index)=>(
+      <div id="msg-container">{msgArr.map((val,index)=>(
         <p key={index}>{val}</p>
       ))}</div>
       <div className="form-row" id="form-container">
