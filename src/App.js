@@ -6,6 +6,7 @@ function App() {
     const socket = io("http://localhost:3001");
     const [msg, setmsg] = useState("");
     const [username, setusername] = useState("");
+    const [connectBtnFlag, setconnectBtnFlag] = useState(false);
     const [appendmsg, setappendmsg] = useState([]);
 
     const onChange = (e) => {
@@ -24,8 +25,8 @@ function App() {
     }
 
     const appendMsg = (val) => {
-        console.log(val);
-        setappendmsg((val => [...val, val]));
+        // console.log(val);
+        setappendmsg((obj) => [...obj, val]);
     }
 
     const usernamePrompt = () => {
@@ -34,6 +35,7 @@ function App() {
         setusername(val);
         // appendMsg('You Joined');
         socket.emit('new-user', val);
+        setconnectBtnFlag(true);
     }
 
     socket.on('test', data => {
@@ -63,17 +65,19 @@ function App() {
   return (
     <div className="container p-3">
       <h4>Hello, {username}</h4>
-      <div id="msg-container">{appendmsg}</div>
+      <div id="msg-container">{appendmsg.map((val,index)=>(
+        <p key={index}>{val}</p>
+      ))}</div>
       <div className="form-row" id="form-container">
         <div className="input-group">
           <div className="input-group-prepend">
-            <button type="button" id="connect" onClick={connect} className="btn btn-success">
+            <button type="button" id="connect" disabled={connectBtnFlag} onClick={connect} className="btn btn-success">
               Connect
             </button>
           </div>
           <input type="text" id="msg" onChange={onChange} value={msg} className="form-control" />
           <div className="input-group-append">
-            <button type="submit" id="send" onClick={send} className="btn btn-primary">
+            <button type="submit" id="send" disabled={!connectBtnFlag} onClick={send} className="btn btn-primary">
               Send
             </button>
           </div>
