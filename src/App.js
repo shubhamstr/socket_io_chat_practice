@@ -6,7 +6,7 @@ function App() {
     const socket = io("http://localhost:3001");
     const [msg, setmsg] = useState("");
     const [username, setusername] = useState("");
-    const [appendmsg, setappendmsg] = useState("");
+    const [appendmsg, setappendmsg] = useState([]);
 
     const onChange = (e) => {
         // console.log(e.target.value);
@@ -23,9 +23,9 @@ function App() {
       usernamePrompt();
     }
 
-    const appendMsg = (e) => {
-        console.log(e);
-        setappendmsg(e);
+    const appendMsg = (val) => {
+        console.log(val);
+        setappendmsg((val => [...val, val]));
     }
 
     const usernamePrompt = () => {
