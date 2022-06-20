@@ -1,4 +1,4 @@
-const io = require("socket.io")("3500");
+const io = require("socket.io")("3001");
 
 const users = {};
 io.on("connection", (socket) => {
