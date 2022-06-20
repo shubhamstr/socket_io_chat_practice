@@ -7,7 +7,7 @@ const io = require("socket.io")(http, {
   }
 });
 
-const users = {};
+let users = {};
 http.listen(3001, () => {
   console.log("server started...");
   io.on("connection", (socket) => {
@@ -17,6 +17,10 @@ http.listen(3001, () => {
       console.log('name',name);
       users[socket.id] = name;
       socket.broadcast.emit("user-connected", name);
+    });
+    socket.on("send-msg", (msg) => {
+      console.log('msg',msg);
+      socket.broadcast.emit("chat-msg", { msg: msg, name: users[socket.id] });
     });
   });
 });

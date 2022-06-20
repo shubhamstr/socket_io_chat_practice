@@ -14,8 +14,8 @@ function App() {
     }
 
     const send = () => {
-        appendMsg(`You: ${msg}`);
         socket.emit('send-msg', msg);
+        appendMsg(`You: ${msg}`);
         setmsg("");
     }
 
@@ -42,8 +42,8 @@ function App() {
     })
 
     socket.on('chat-msg', data => {
-        // console.log(`${data}: ${data.msg}`);
-        appendMsg(`${data}: ${data.msg}`);
+        // console.log(`${data.name}: ${data.msg}`);
+        appendMsg(`${data.name}: ${data.msg}`);
     })
     
     socket.on('user-connected', name => {
