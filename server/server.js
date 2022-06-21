@@ -6,10 +6,10 @@ const io = require("socket.io")(http, {
     origin: "*"
   }
 });
+let users = {};
 
 http.listen(3001, () => {
   console.log("server started...");
-  let users = {};
   io.on("connection", (socket) => {
     console.log('user connected..', socket.id);
     // socket.emit("test", "Hello World");
