@@ -1,9 +1,9 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
 import { io } from "socket.io-client";
+import { useState, useEffect } from "react";
+const socket = io("http://localhost:3001");
 
 function App() {
-    const socket = io("http://localhost:3001");
     const [msg, setmsg] = useState("");
     const [username, setusername] = useState("");
     const [connectBtnFlag, setconnectBtnFlag] = useState(false);
@@ -16,7 +16,7 @@ function App() {
 
     const send = () => {
         socket.emit('send-msg', msg);
-        // appendMsg(`You: ${msg}`);
+        appendMsg(`You: ${msg}`);
         setmsg("");
     }
 
@@ -51,7 +51,7 @@ function App() {
       })
       
       socket.on('user-connected', name => {
-          // console.log(`${name}: connected`);s
+          // console.log(`${name}: connected`);
           appendMsg(`${name}: connected`);
       })
       
@@ -60,7 +60,7 @@ function App() {
           appendMsg(`${name}: disconnected`);
       })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [socket])
     
   return (
     <div className="container p-3">
